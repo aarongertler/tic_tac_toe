@@ -16,13 +16,15 @@ class Game
     def add_move(position, symbol)
       position.downcase!
       square = state[position.to_sym]
-      if square == " X" || square == " O"
+      if square == "X" || square == "O"
         puts "Error! Please choose an available square."
+        moved = false # Need to state this explicitly, false and nil are different
       elsif square != nil
         state[position.downcase.to_sym] = symbol
         moved = true
       else
         puts "Error! Please choose a real square."
+        moved = false # Need to state this explicitly, false and nil are different
       end
 
       return state, moved
