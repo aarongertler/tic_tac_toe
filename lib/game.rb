@@ -8,9 +8,9 @@ class Game
     end
 
     def show
-      puts " #{state[:a1]} #{state[:a2]} #{state[:a3]}
-          \n #{state[:b1]} #{state[:b2]} #{state[:b3]}
-          \n #{state[:c1]} #{state[:c2]} #{state[:c3]}"
+      " #{state[:a1]} #{state[:a2]} #{state[:a3]}
+        \n #{state[:b1]} #{state[:b2]} #{state[:b3]}
+        \n #{state[:c1]} #{state[:c2]} #{state[:c3]}"
     end
 
     def add_move(position, symbol)
@@ -32,7 +32,7 @@ class Game
 
   end
 
-  attr_accessor :player_1, :player_2
+  attr_accessor :player_1, :player_2, :active_player, :winner
   attr_reader :board
 
   def initialize(player_1_name, player_2_name)
@@ -49,7 +49,7 @@ class Game
                         c3: "c3"}, false)
     @active_player = nil
     @winner = nil
-    play_game
+    # play_game # Removing this for testing purposes
   end
 
   def victory_or_tie_check
@@ -66,7 +66,7 @@ class Game
 
       @winner = @active_player
       return true
-    elsif state.values.uniq == ["X", "O"] # Board is completely full, but no three-in-a-rows
+    elsif state.values.uniq.sort == ["O","X"] # Board is completely full, but no three-in-a-rows
       @winner = "tie game"
       return true
     else
@@ -103,7 +103,7 @@ class Game
       make_move
     end
 
-    @board.show
+    puts @board.show
 
     if @winner == "tie game"
       puts "It's a tie!"
@@ -115,9 +115,9 @@ class Game
 end
 
 
-puts "Player 1, please state your name:"
-player_1_name = gets.chomp
-puts "Player 2, please state your name:"
-player_2_name = gets.chomp
+# puts "Player 1, please state your name:"
+# player_1_name = gets.chomp
+# puts "Player 2, please state your name:"
+# player_2_name = gets.chomp
 
-game = Game.new(player_1_name,player_2_name)
+# game = Game.new(player_1_name,player_2_name)
